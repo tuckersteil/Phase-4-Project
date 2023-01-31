@@ -17,12 +17,14 @@ code {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* see notes below */
   grid-auto-rows: minmax(200px, auto);
   grid-gap: 1rem;
+background-color: rgb(13, 114, 13);
+
 }
 
 .course {
   /*height: 200px;*/
   /*background: red;*/
-  border: 2px solid #e7e7e7;
+  border: 2px solid #eeff00;
   border-radius: 4px;
   padding: .5rem;
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
@@ -34,6 +36,7 @@ code {
   flex-direction: column;
   position: relative;
   color: #5d5e5e;
+  background-color: white;
 } /* li item */
 
 .thumbnail img {
@@ -75,12 +78,186 @@ footer {
   margin: .5rem 0 0;
   min-height: 30px;
   font-size: .60rem;
+ 
 }
 
 .post-meta {
   margin-top: .5rem;
+  background-color: white;
 }
 
 .comments {
   margin-left: .5rem;
+}
+
+.box{
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+}
+
+.new-thumb img {
+
+  height: 350px;
+  padding: 1.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
+  background-color: white;
+  
+  
+}
+
+.card-content-new {
+  font-size: .75rem;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 100px;
+  background-color: white;
+}
+
+.category-new {
+  font-size: 2rem;
+  text-transform: uppercase;
+  
+}
+
+.comments-new {
+  margin-left: .5rem;
+  font-size: 1rem;
+  font-style: italic;
+
+}
+
+.hume{
+  display: inline;
+  width: 1000px;
+  height: 500px;
+}
+
+.testy{
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+}
+
+.numeral {
+  display: inline;
+  margin-left: .5rem;
+  background-color: white ;
+}
+
+.content {
+  display: inline-block;
+  vertical-align: top;
+  width: 90%;
+}
+
+.categoryy {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-align: center;
+
+}
+.gray {
+  background-color: #d7d7d7;
+
+ 
+}
+.categoryyy {
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+
+}
+
+.size{
+  font-size: .85rem;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.sizee{
+  margin: 0;
+  display: block;
+  
+}
+
+.react-calendar{
+  margin-top: 1rem;
+}
+
+.color{
+  color: red;
+}
+
+.grayy {
+  background-color: #d7d7d7;
+  width: 280px;
+  height: 240px;
+}
+
+span + span {
+  margin-left: 20px;
+  position: relative;
+}
+
+.tucker{
+  display: "inline-block";
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%
+}
+
+.sizey{
+
+  text-align: center;
+  margin-bottom: .5rem;
+  margin-left: 35%;
+  color: #eeff00;
+}
+
+.colored {
+  background-color:  rgb(13, 114, 13);
+}
+
+.white {
+  background-color: white ;
+  }
+
+.coursess {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* see notes below */
+  grid-auto-rows: minmax(200px, auto);
+  grid-gap: 1rem;
+background-color:white;
+}
+
+.navB{
+  color: red;
+  position: relative;
+  margin: 2rem;
+}
+
+.navc{
+  position: relative;
+  margin: 2rem;
+}
+
+.posty{
+  text-align: center;
+  display: block;
+}
+
+.postyy{
+  text-align: center;
+  display: block;
+  margin-left: 5rem;
 }

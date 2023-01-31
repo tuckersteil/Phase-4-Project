@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-
-function CourseList(){
+import { Link } from "react-router-dom";
+function CourseList({user, chooseCourse}){
     const [courses, setCourses] = useState([]);
+    
 
 
     useEffect(() => {
@@ -10,30 +11,34 @@ function CourseList(){
         .then((courses)=> setCourses(courses));
     }, []);
 
-    console.log(courses)
+    // function handleClick(course){
+    //     chooseCourse(course)
+
+       
+    // }
 
     return (
         <section className="courses">
             {courses.map((course) => (
-                <article className="course" key={course.id}>
+                <Link className="course" key={course.id} to={`/course/${course.id}`} >
                     <picture className="thumbnail">
                         <img src={course.img}/>
                     </picture>
 
                     <div className="card-content">
-                        <h2 class="category category__03">{course.name}:</h2>
+                        <h2 className="category category__03">{course.name}:</h2>
                     </div>
 
                     <footer>
                         <div className="post-meta">
-                            <span>{course.location}--</span>
+                            <strong>{course.location}</strong>
                             <span className="comments">(Par: {course.par}),</span>
                             <span className="comments">(Holes: {course.holes}),</span>
                             <span className="comments">(length: {course.length})</span>
                         </div>
                     </footer>               
                    
-                </article>
+                </Link>
             ))}
         </section>
     )
