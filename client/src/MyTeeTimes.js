@@ -55,8 +55,8 @@ function repostTime(teetime){
 
    
     return(
-        <div className="whiter">
-            <section className="coursess whiter"> 
+        <div className="white">
+            <section className="coursess white"> 
                 <h1>Posted Tee Times:</h1>
                 {userPostTimes.map((teetime)=> (
                 <section className="gray" key={teetime.id}>

@@ -157,10 +157,6 @@ function TeeTimes({user}){
 
                 </section>
             ))}
-            
-
-           
-            
         </section>
         </div>
      )
