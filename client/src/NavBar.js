@@ -27,7 +27,9 @@ return (
             <Link to='/' className="sizey">Last Minute Tee Times</Link>
         </h1>
         <span className="navB">
-          <button className="navc"> My TeeTimes</button>
+          <button className="navc"> 
+            <Link to='/myteetimes' >My Tee-times</Link>
+          </button>
           <button className="navB" variant="outline"  onClick={handleLogoutClick}>Logout</button>
         </span>
         

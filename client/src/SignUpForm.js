@@ -33,36 +33,39 @@ function SignUpForm({ onLogin }){
 
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username"></label>
                 <input 
                 type="text"
                 id="username"
                 autoComplete="off"
                 value={username}
+                placeholder="Username"
                 onChange={(e) => setUsername(e.target.value)}
                 />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password"></label>
                 <input 
                 type="password"
                 id="password"
                 value={password}
+                placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
                 />
-            <label htmlFor="password">Password Confirmation</label>
+            <label htmlFor="password"></label>
                 <input 
                 type="password"
                 id="password_confirmation"
+                placeholder="Password Confirmation"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 autoComplete="current-password"
                 />
-            <button variant="fill" color="primary" type="submit">
+            <button variant="fill" color="primary" type="submit" class="btn btn-primary btn-block btn-large">
                 {isLoading ? "Loading..." : "Sign Up"}
             </button>
             <div>
                 {errors.map((err) => (
-                    <p key={err}>{err}</p>
+                    <p key={err} className="whitey">{err}</p>
                 ))}
             </div>
         </form>

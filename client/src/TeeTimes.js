@@ -22,7 +22,7 @@ function TeeTimes({user}){
           if (r.ok) {
             //  r.json().then((data) => setAllTeeTimes(data))
             r.json().then((data) => 
-            setAllTeeTimes(data.filter((teetime)=>  teetime.date === today  )));
+            setAllTeeTimes(data.filter((teetime)=>  teetime.date === today && teetime.status === "Posted" )));
           }
         });
       }, [date]);
@@ -140,7 +140,9 @@ function TeeTimes({user}){
                     <div className="card-content">
                         <h2 className="categoryy category__03">{teetime.time}:</h2>
                     </div>
-
+                    {teetime.user_id === user.id ? (
+                        <p className="rojo">This Time Belongs to you</p>
+                    ): (null)}
                     <h1 className="categoryyy">${teetime.price}</h1>
                     
                     <footer className="size">
@@ -157,26 +159,7 @@ function TeeTimes({user}){
             ))}
             
 
-            {/* {allTeeTimes.map((teetime) => (
-                <section className="gray" key={teetime.id}>
-                    <div className="card-content">
-                        <h2 className="categoryy category__03">{teetime.time}:</h2>
-                    </div>
-
-                    <h1 className="categoryyy">${teetime.price}</h1>
-                    
-                    <footer className="size">
-                        <span>Player: ({teetime.players})</span> 
-                        <p></p> 
-                        <span>Holes: ({teetime.holes})</span>
-                        <p></p>
-                        <button>
-                         <Link to={`/teetimes/book/${teetime.id}`} >Book Now</Link>
-                        </button>
-                    </footer>
-
-                </section>
-            ))} */}
+           
             
         </section>
         </div>

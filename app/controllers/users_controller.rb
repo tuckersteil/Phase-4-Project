@@ -30,6 +30,11 @@ class UsersController < ApplicationController
         head :no_content
     end
 
+    def usertime
+        user = User.find(params[:id])
+        render json: user.teetimes
+    end
+
     private 
 
     def user_params 

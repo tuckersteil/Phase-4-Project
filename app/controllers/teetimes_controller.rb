@@ -17,10 +17,24 @@ class TeetimesController < ApplicationController
         render json: time.teetimes
     end 
 
+    def update
+        time = Teetime.find_by(id: params[:id])
+        time.update(status: params[:status])
+        # timey = time.user_id
+        # user = User.find_by(id: timey)
+        # tee = user.teetimes
+        render json: time
+        
+    end 
+
     def destroy
-        time = find_time
+        time = Teetime.find_by(id: params[:id])
+        timey = time.user_id
+        user = User.find_by(id: timey)
+        tee = user.teetimes
+        timme = tee.where(status:  "Posted")
         time.destroy
-        head :no_content
+        render json: timme
     end 
 
     def hello
@@ -37,5 +51,9 @@ class TeetimesController < ApplicationController
 
     def find_time
         Teetime.find(params[:id])
+    end 
+
+    def time_params 
+        params.permit(:status)
     end 
 end

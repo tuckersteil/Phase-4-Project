@@ -17,7 +17,7 @@ function Course({user}){
 
     return (
         <div className="white">
-            <div  className="numeral" key={courseInfo.id} to="/course" >
+            <div  className="numeral" key={courseInfo.id} >
                 <picture className="new-thumb">
                     <img src={courseInfo.img}/>
                 </picture>

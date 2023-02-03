@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Confirm from "./Confirm";
-function BookTeeTime(){
+function BookTeeTime({user}){
     let { id } = useParams();
     const [teetime, setTeeTime] = useState([])
     const [course, setCourse] = useState([])
@@ -46,7 +46,7 @@ function BookTeeTime(){
                 <p></p>   
             </div>
             
-            <Confirm teetime={teetime}/>
+            <Confirm teetime={teetime} user={user}/>
         </div>
     )
 }

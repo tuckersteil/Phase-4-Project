@@ -6,6 +6,7 @@ import CourseList from "./CourseList";
 import Course from "./Course";
 import PracticeCss from "./Confirm";
 import BookTeeTime from "./BookTeeTime";
+import MyTeeTimes from "./MyTeeTimes";
 function App() {
   const [user, setUser] = useState(null);
   const [course, setCourse] = useState([]);
@@ -30,8 +31,8 @@ console.log(course)
       <Routes>
         <Route path="/" element={<CourseList user={user} chooseCourse={chooseCourse}/>}/>
         <Route path="/course/:id" element={<Course user={user}/>}/>
-        <Route path="/teetimes/book/:id" element={<BookTeeTime />}/>
-        {/* <Route path="/teetimes/post/:id" element={<BookTeeTime />}/> */}
+        <Route path="/teetimes/book/:id" element={<BookTeeTime user={user}/>}/>
+        <Route path ="/myteetimes" element={<MyTeeTimes user={user}/>} />
       </Routes>
       
     </div>
