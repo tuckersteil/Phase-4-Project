@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Calendar from "react-calendar"
 
-function TeeTimes({user}){
+function TeeTimes({user, bookTime}){
     let { id } = useParams();
     const [allTeeTimes, setAllTeeTimes] = useState([]);
     const [date, setDate] = useState(new Date());
@@ -15,36 +15,20 @@ function TeeTimes({user}){
         holes: '',
         time: ''
       })
-    
+    console.log(date, today, time)
 
     useEffect(() => {
         fetch(`/teetimes/${id}`).then((r) => {
           if (r.ok) {
-            //  r.json().then((data) => setAllTeeTimes(data))
             r.json().then((data) => 
             setAllTeeTimes(data.filter((teetime)=>  teetime.date === today && teetime.status === "Posted" )));
           }
         });
       }, [date]);
 
-    
-    
       function onChange(calDate){
         setDate(calDate)
       }
-        
-       
-    
-      function onClickDay(day){
-        console.log(day)
-        let colorCal = {
-            background: "red"
-        }
-      }
-
-    let colorCal = {
-        background: ""
-    }
       
     function handleClick(){
         setClicked(!clicked)
@@ -58,7 +42,6 @@ function TeeTimes({user}){
             holes: parseInt(submitTee.holes),
             time: submitTee.time,
             date: today,
-            user_id: user.id,
             course_id: parseInt(id),
             status: "Posted"
         }
@@ -71,7 +54,8 @@ function TeeTimes({user}){
             body: JSON.stringify(finalTeeData)
         })
         .then((r) => r.json())
-        .then((teeTime) => setAllTeeTimes([...allTeeTimes, teeTime]), setClicked(false), setSubmitTee({ players: '',
+        .then((teeTime) => 
+        setAllTeeTimes([...allTeeTimes, teeTime]), setClicked(false), setSubmitTee({ players: '',
         price: '',
         holes: '',
         time: ''}))
@@ -84,11 +68,15 @@ function TeeTimes({user}){
           [event.target.name]: event.target.value
         })
       }
-      console.log(allTeeTimes)
+
+      function handleBook(teeTime){
+       bookTime(teeTime)
+      }
+
     return (
-        <div className="white"> <strong>Showing Tee Times for:</strong> {time}
+    <div className="white"> <strong>Showing Tee Times for:</strong> {time}
         <section className="coursess">
-            <Calendar onChange={onChange} style={colorCal} onClickDay={onClickDay} value={date} className="react-calendar"/>
+            <Calendar onChange={onChange} value={date} className="react-calendar"/>
             <h1 className="posty">Post a Tee Time:
                 <p></p>
                 <p></p>
@@ -135,30 +123,40 @@ function TeeTimes({user}){
                 <label> Date: {today} </label>
                 <br/>
                 <button type="submit">Submit Tee Time</button>
-            </form>) : allTeeTimes.map((teetime) => (
-                <section className="gray" key={teetime.id}>
+            </form>) : allTeeTimes.map((teetime) => (teetime.user_id === user.id ?
+                (<section className="gray" key={teetime.id}>
                     <div className="card-content">
                         <h2 className="categoryy category__03">{teetime.time}:</h2>
                     </div>
-                    {teetime.user_id === user.id ? (
-                        <p className="rojo">This Time Belongs to you</p>
-                    ): (null)}
+                    <p className="rojo">This Time Belongs to you</p>
                     <h1 className="categoryyy">${teetime.price}</h1>
-                    
                     <footer className="size">
                         <span>Player: ({teetime.players})</span> 
                         <p></p> 
                         <span>Holes: ({teetime.holes})</span>
                         <p></p>
-                        <button>
-                         <Link to={`/teetimes/book/${teetime.id}`} >Book Now</Link>
-                        </button>
+                    </footer>
+
+                </section>) : (
+                    <section className="gray" key={teetime.id}>
+                    <div className="card-content">
+                        <h2 className="categoryy category__03">{teetime.time}:</h2>
+                    </div>
+                    <h1 className="categoryyy">${teetime.price}</h1>
+                    <footer className="size">
+                        <span>Player: ({teetime.players})</span> 
+                        <p></p> 
+                        <span>Holes: ({teetime.holes})</span>
+                        <p></p>
+                        <button onClick={ (e) => handleBook(teetime)}>Book Now</button>
                     </footer>
 
                 </section>
+                )
             ))}
         </section>
-        </div>
+    </div>
      )
 }
 export default TeeTimes
+

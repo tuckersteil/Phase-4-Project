@@ -30,7 +30,10 @@ return (
           <button className="navc"> 
             <Link to='/myteetimes' >My Tee-times</Link>
           </button>
-          <button className="navB" variant="outline"  onClick={handleLogoutClick}>Logout</button>
+          <NavLink to="/">
+            <button className="navB" variant="outline"  onClick={handleLogoutClick}>Logout</button>
+          </NavLink>
+          
         </span>
         
         

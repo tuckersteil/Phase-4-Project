@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link} from "react-router-dom";
-function Confirm({teetime, user}){
+function Confirm({teetime}){
 const price = (teetime.players * teetime.price)
 const navigate = useNavigate();
 const [errors, setErrors] = useState([]);
@@ -14,7 +13,6 @@ function postAndDelete(){
         holes: teetime.holes,
         time: teetime.time,
         date: teetime.date,
-        user_id: user.id,
         course_id: teetime.course_id,
         status: "Booked"
     }
@@ -44,14 +42,6 @@ function postAndDelete(){
 
     return (
         <div className="yay">   
-            {teetime.user_id === user.id ? (
-                <div>
-                <h1>This TeeTime already belongs to you, You cannot book twice.</h1>
-                <button>
-                <Link to={`/course/${teetime.course_id}`} >Go Back</Link>
-                </button>
-                </div>
-                ) : (
                 <span >
                     <h1>CONFIRM BOOKING:</h1>
                     <span><strong>Date:</strong> {teetime.date}</span>
@@ -64,7 +54,7 @@ function postAndDelete(){
                     <button onClick={postAndDelete}> {isLoading ? "Loading..." : "Book Tee Time"}</button>
 
                     <p></p>
-                </span>)}
+                </span>
         </div>
 
     )

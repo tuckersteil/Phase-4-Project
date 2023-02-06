@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Confirm from "./Confirm";
 import TeeTimes from "./TeeTimes";
 function Course({user}){
     const [courseInfo, setCourseInfo] = useState([]);
+    const [clicked, setClicked] = useState(true)
+    const [teeTime, setTeeTime] = useState([]);
     let { id } = useParams();
    console.log(user)
+
     useEffect(() => {
         fetch(`/courses/${id}`).then((r) => {
           if (r.ok) {
@@ -13,7 +17,11 @@ function Course({user}){
         });
       }, [id]);
 
-      console.log(courseInfo.id)
+      function bookTime(time){
+        setTeeTime(time)
+        setClicked(false)
+      }
+
 
     return (
         <div className="white">
@@ -38,11 +46,13 @@ function Course({user}){
                 <strong className="comments-new">Description: </strong> {courseInfo.description}     
             </div>
             <p></p>
-            <TeeTimes user={user}/>
-        </div>
-
+            {clicked ? (
+                <TeeTimes user={user} bookTime={bookTime}/>
+            ):(
+                <Confirm teetime={teeTime} />
+            )}
             
-// today={today}
+        </div>
 
         
     )

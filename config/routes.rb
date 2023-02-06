@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   delete "/users/:id", to: "users#destroy"
   get "/teetimes/book/:id", to: "teetimes#hello"
   get "/teetimes/time/:id", to: "teetimes#time"
-  get "/users/time/:id", to: "users#usertime"
+  get "/users/time", to: "users#usertime"
   # resources :users
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-function CourseList({user, chooseCourse}){
+function CourseList(){
     const [courses, setCourses] = useState([]);
     
-
-
     useEffect(() => {
         fetch("/courses")
         .then((r)=> r.json())
         .then((courses)=> setCourses(courses));
     }, []);
 
-    // function handleClick(course){
-    //     chooseCourse(course)
-
-       
-    // }
 
     return (
         <section className="courses">

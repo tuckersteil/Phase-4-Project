@@ -1,7 +1,7 @@
 class TeetimesController < ApplicationController
 
     def create
-        tee = Teetime.create!(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: params[:user_id], course_id: params[:course_id], status: params[:status])
+        tee = Teetime.create!(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id], status: params[:status])
         render json: tee
     rescue ActiveRecord::RecordInvalid => invalid
         render json: { errors: [invalid.record.errors] }, status: :unprocessable_entity
@@ -19,11 +19,11 @@ class TeetimesController < ApplicationController
 
     def update
         time = Teetime.find_by(id: params[:id])
+        timey = time.user_id
         time.update(status: params[:status])
-        # timey = time.user_id
-        # user = User.find_by(id: timey)
-        # tee = user.teetimes
-        render json: time
+        user = User.find_by(id: timey)
+        tee = user.teetimes
+        render json: tee
         
     end 
 
@@ -32,9 +32,9 @@ class TeetimesController < ApplicationController
         timey = time.user_id
         user = User.find_by(id: timey)
         tee = user.teetimes
-        timme = tee.where(status:  "Posted")
+        # timme = tee.where(status:  "Posted")
         time.destroy
-        render json: timme
+        render json: tee
     end 
 
     def hello
