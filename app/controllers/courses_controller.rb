@@ -23,6 +23,29 @@ class CoursesController < ApplicationController
         render json: course 
     end 
 
+
+    def wordy
+        courses = Course.all
+        final = []
+        courses.each do |course|
+            if course.description.include?(params[:word])
+                final << course
+            end
+        end
+       if (final.length >= 1)
+            render json: final
+       else 
+            render json: { errors: ["no courses found"]}
+
+       end
+    end 
+    
+    # Write a custom route that takes in a parameter of a word and looks at all 
+    # the courses and their descriptions and finds any courses that have that 
+    # word in the description.  Return all the courses that meet this condition.
+    #  If no courses meet the condition then you should render json
+    #  that says: no courses found under a key of error.
+
     private 
 
     def course_params 
@@ -32,4 +55,6 @@ class CoursesController < ApplicationController
     def find_course
         Course.find(params[:id])
     end 
+
+
 end

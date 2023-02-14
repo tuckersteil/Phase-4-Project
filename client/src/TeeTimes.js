@@ -4,6 +4,7 @@ import Calendar from "react-calendar"
 
 function TeeTimes({user, bookTime}){
     let { id } = useParams();
+    const [errors, setErrors] = useState([]);
     const [allTeeTimes, setAllTeeTimes] = useState([]);
     const [date, setDate] = useState(new Date());
     const [clicked, setClicked] = useState(false)
@@ -15,7 +16,7 @@ function TeeTimes({user, bookTime}){
         holes: '',
         time: ''
       })
-    console.log(date, today, time)
+    console.log(errors)
 
     useEffect(() => {
         fetch(`/teetimes/${id}`).then((r) => {
@@ -53,13 +54,35 @@ function TeeTimes({user, bookTime}){
             },
             body: JSON.stringify(finalTeeData)
         })
-        .then((r) => r.json())
-        .then((teeTime) => 
-        setAllTeeTimes([...allTeeTimes, teeTime]), setClicked(false), setSubmitTee({ players: '',
-        price: '',
-        holes: '',
-        time: ''}))
+        .then((r) => {
+            // setClicked(false);
+            if (r.ok) {
+                r.json().then((teeTime) => setAllTeeTimes([...allTeeTimes, teeTime]), setSubmitTee({ players: '',
+                price: '',
+                holes: '',
+                time: ''}))
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+        })
     }
+console.log(errors)
+// }).then((r) => {
+//     setIsLoading(false);
+//     if (r.ok) {
+//       r.json().then((user) => onLogin(user));
+//     } else {
+//       r.json().then((err) => setErrors(err.errors));
+//     }
+//   });
+
+// .then((r) => r.json())
+// .then((teeTime) => 
+// setAllTeeTimes([...allTeeTimes, teeTime]), setClicked(false), setSubmitTee({ players: '',
+// price: '',
+// holes: '',
+// time: ''}))
+
 
     function handleChange(event){
         event.preventDefault()
@@ -83,8 +106,9 @@ function TeeTimes({user, bookTime}){
                 <button className="postyy" onClick={handleClick}>Click Here</button>
             </h1>
             {clicked ? (
+                <div>
             <form onSubmit={handleSubmit}>
-                <label> Players: <br/>
+                <label> Players: (must be 1 to 4)<br/>
                     <input
                     type="text"
                     name="players"
@@ -123,7 +147,12 @@ function TeeTimes({user, bookTime}){
                 <label> Date: {today} </label>
                 <br/>
                 <button type="submit">Submit Tee Time</button>
-            </form>) : allTeeTimes.map((teetime) => (teetime.user_id === user.id ?
+            </form>
+            {errors.map((err) => (
+                    <p key={err} >{err}</p>
+                ))}
+            </div>
+            ) : allTeeTimes.map((teetime) => (teetime.user_id === user.id ?
                 (<section className="gray" key={teetime.id}>
                     <div className="card-content">
                         <h2 className="categoryy category__03">{teetime.time}:</h2>

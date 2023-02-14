@@ -1,11 +1,20 @@
 class TeetimesController < ApplicationController
 
     def create
-        tee = Teetime.create!(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id], status: params[:status])
-        render json: tee
-    rescue ActiveRecord::RecordInvalid => invalid
-        render json: { errors: [invalid.record.errors] }, status: :unprocessable_entity
+        tee = Teetime.create(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id], status: params[:status])
+        if tee.valid?
+            render json: tee
+        else 
+            render json: { errors: tee.errors.full_messages }, status: :unprocessable_entity
+        end
     end 
+
+    # def create
+    #     tee = Teetime.create!(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id], status: params[:status])
+    #     render json: tee
+    # rescue ActiveRecord::RecordInvalid => invalid
+    #     render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+    # end 
 
     def index
         time = Teetime.all
@@ -32,20 +41,19 @@ class TeetimesController < ApplicationController
         timey = time.user_id
         user = User.find_by(id: timey)
         tee = user.teetimes
-        # timme = tee.where(status:  "Posted")
         time.destroy
         render json: tee
     end 
 
-    def hello
-        time = Teetime.find_by(id: params[:id])
-       render json: time.course
-    end 
+    # def hello
+    #     time = Teetime.find_by(id: params[:id])
+    #    render json: time.course
+    # end 
 
-    def time 
-        time = Teetime.find_by(id: params[:id])
-        render json: time
-    end 
+    # def time 
+    #     time = Teetime.find_by(id: params[:id])
+    #     render json: time
+    # end 
 
     private 
 
