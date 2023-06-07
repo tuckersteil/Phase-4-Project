@@ -7,6 +7,7 @@ class CreateCourses < ActiveRecord::Migration[6.1]
       t.integer :holes
       t.integer :length
       t.string :description
+      t.string :img
 
       t.timestamps
     end
