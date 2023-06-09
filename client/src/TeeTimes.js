@@ -67,10 +67,10 @@ function TeeTimes({user, bookTime}){
             //     r.json().then((err) => setErrors(err.errors));
             // }
         // });
-        setSubmitTee({ players: '',
-            price: '',
-            holes: '',
-            time: ''})
+        // setSubmitTee({ players: '',
+        //     price: '',
+        //     holes: '',
+        //     time: ''})
     }
 console.log(errors)
 // }).then((r) => {
