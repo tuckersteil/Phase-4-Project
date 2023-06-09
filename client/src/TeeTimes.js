@@ -55,10 +55,7 @@ function TeeTimes({user, bookTime}){
             body: JSON.stringify(finalTeeData)
         })
         .then((r)=> r.json())  
-        .then((teeTime) => setAllTeeTimes([...allTeeTimes, teeTime]), setSubmitTee({ players: '',
-            price: '',
-            holes: '',
-            time: ''}));
+        .then((teeTime) => setAllTeeTimes([...allTeeTimes, teeTime]));
         // .then((r) => {
             // setClicked(false);
             // if (r.ok) {
@@ -70,6 +67,10 @@ function TeeTimes({user, bookTime}){
             //     r.json().then((err) => setErrors(err.errors));
             // }
         // });
+        setSubmitTee({ players: '',
+            price: '',
+            holes: '',
+            time: ''})
     }
 console.log(errors)
 // }).then((r) => {
