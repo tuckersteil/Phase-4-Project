@@ -1,7 +1,7 @@
 class TeetimesController < ApplicationController
 
     def create
-        tee = Teetime.create(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id])
+        tee = Teetime.create(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id], status: params[:status])
         if tee.valid?
             render json: tee
         else 
