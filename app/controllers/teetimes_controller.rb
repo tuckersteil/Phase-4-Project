@@ -2,19 +2,13 @@ class TeetimesController < ApplicationController
 
     def create
         tee = Teetime.create(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id], status: params[:status])
-        if tee.valid?
+        # if tee.valid?
             render json: tee
-        else 
-            render json: { errors: tee.errors.full_messages }, status: :unprocessable_entity
-        end
+        # else 
+            # render json: { errors: tee.errors.full_messages }, status: :unprocessable_entity
+        # end
     end 
-    # , status: params[:status]
-    # def create
-    #     tee = Teetime.create!(time: params[:time], date: params[:date], players: params[:players], price: params[:price], holes: params[:holes], user_id: session[:user_id], course_id: params[:course_id], status: params[:status])
-    #     render json: tee
-    # rescue ActiveRecord::RecordInvalid => invalid
-    #     render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-    # end 
+
 
     def index
         time = Teetime.all

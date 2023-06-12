@@ -55,8 +55,8 @@ function TeeTimes({user, bookTime}){
             body: JSON.stringify(finalTeeData)
         })
         .then((r)=> r.json())  
-        .then((teeTime) => console.log(teeTime))
-        // setAllTeeTimes([...allTeeTimes, teeTime]));
+        .then((teeTime) => setAllTeeTimes([...allTeeTimes, teeTime]))}
+        
         // .then((r) => {
             // setClicked(false);
             // if (r.ok) {
@@ -72,8 +72,8 @@ function TeeTimes({user, bookTime}){
         //     price: '',
         //     holes: '',
         //     time: ''})
-    }
-console.log(errors)
+    
+
 // }).then((r) => {
 //     setIsLoading(false);
 //     if (r.ok) {
